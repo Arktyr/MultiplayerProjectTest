@@ -1,4 +1,5 @@
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses;
+using CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data;
 
 namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider
 {
@@ -7,8 +8,11 @@ namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider
         public StaticDataProvider(AllAssetsData allAssetsData)
         {
             AllAssetsAddresses = allAssetsData.AllAssetsAddresses;
+            GameBalanceData = allAssetsData.GameBalanceData;
         }
-        
-        public AllAssetsAddresses AllAssetsAddresses { get; private set; }
+
+        public AllAssetsAddresses AllAssetsAddresses { get; }
+
+        public GameBalanceData GameBalanceData { get; }
     }
 }

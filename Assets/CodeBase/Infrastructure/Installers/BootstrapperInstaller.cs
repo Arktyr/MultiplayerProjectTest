@@ -8,7 +8,8 @@ namespace CodeBase.Infrastructure.Installers
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.Register<AppBootstrapper>(Lifetime.Singleton)
+            builder
+                .Register<AppBootstrapper>(Lifetime.Singleton)
                 .AsImplementedInterfaces();
         }
     }

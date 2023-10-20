@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Factories;
+﻿using CodeBase.Gameplay.Services.Gravity;
+using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,22 +12,25 @@ namespace CodeBase.Gameplay.Spawner
         private readonly ILevelSpawnerProvider _levelSpawnerProvider;
         
         private readonly IJoystickFactory _joystickFactory;
+        private readonly IGravityAttraction _gravityAttraction;
 
         public LevelSpawner(IJoystickFactory joystickFactory,
-            ILevelSpawnerProvider levelSpawnerProvider)
+            ILevelSpawnerProvider levelSpawnerProvider,
+            IGravityAttraction gravityAttraction)
         {
             _joystickFactory = joystickFactory;
             _levelSpawnerProvider = levelSpawnerProvider;
+            _gravityAttraction = gravityAttraction;
         }
 
-        public async UniTask Spawn() => 
-            await _joystickFactory.Create();
-
-        public void Initialize()
+        public async UniTask Spawn()
         {
-            Debug.Log("1");
-            _levelSpawnerProvider.SetLevelSpawner(this);
-        }
+            await _joystickFactory.Create();
+            _gravityAttraction.Enable();
+        } 
             
+
+        public void Initialize() => 
+            _levelSpawnerProvider.SetLevelSpawner(this);
     }
 }

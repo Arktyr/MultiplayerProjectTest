@@ -1,6 +1,8 @@
 using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Logger;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
+using CodeBase.Infrastructure.Services.SceneLoader;
 using CodeBase.Infrastructure.StateMachines.App.FSM;
 using CodeBase.Infrastructure.StateMachines.App.States;
 using UnityEngine;
@@ -22,6 +24,8 @@ namespace CodeBase.Infrastructure.Installers
         private void BindServices(IContainerBuilder builder)
         {
             builder.Register<ICustomLogger, CustomLogger>(Lifetime.Singleton);
+            builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
+            builder.Register<IAddressablesLoader, AddressablesLoader>(Lifetime.Singleton);
 
             builder.Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton)
                 .WithParameter(_allAssetsData);

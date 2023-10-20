@@ -33,7 +33,9 @@ namespace CodeBase.Infrastructure.Installers
 
             builder.Register<ILevelSpawnerProvider, LevelSpawnerProvider>(Lifetime.Singleton);
             builder.Register<IJoystickProvider, JoystickProvider>(Lifetime.Singleton);
-            builder.Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton)
+            
+            builder
+                .Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton)
                 .WithParameter(_allAssetsData);
         }
 

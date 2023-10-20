@@ -1,12 +1,14 @@
 using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Factories.Joysticks;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Logger;
+using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
-using CodeBase.Infrastructure.Services.Providers.UIProvider;
+using CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data;
 using CodeBase.Infrastructure.Services.SceneLoader;
-using CodeBase.Infrastructure.Services.Updater;
+using CodeBase.Infrastructure.Services.Tickable;
 using CodeBase.Infrastructure.StateMachines.App.FSM;
 using CodeBase.Infrastructure.StateMachines.App.States;
 using UnityEngine;

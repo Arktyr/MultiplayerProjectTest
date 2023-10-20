@@ -7,7 +7,6 @@ namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.UI
     public class UIAddresses : ScriptableObject
     {
         public AssetReferenceGameObject Canvas;
-        public AssetReferenceGameObject EventSystem;
         public AssetReferenceGameObject Joystick;
     }
 }

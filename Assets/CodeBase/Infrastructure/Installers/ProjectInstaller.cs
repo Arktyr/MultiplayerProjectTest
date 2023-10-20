@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Logger;
+using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using CodeBase.Infrastructure.Services.Providers.UIProvider;
 using CodeBase.Infrastructure.Services.SceneLoader;
@@ -29,7 +30,8 @@ namespace CodeBase.Infrastructure.Installers
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.Register<IAddressablesLoader, AddressablesLoader>(Lifetime.Singleton);
             builder.Register<IJoystickFactory, JoystickFactory>(Lifetime.Singleton);
-            
+
+            builder.Register<ILevelSpawnerProvider, LevelSpawnerProvider>(Lifetime.Singleton);
             builder.Register<IJoystickProvider, JoystickProvider>(Lifetime.Singleton);
             builder.Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton)
                 .WithParameter(_allAssetsData);

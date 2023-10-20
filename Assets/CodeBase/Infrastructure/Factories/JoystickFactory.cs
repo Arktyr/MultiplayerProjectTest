@@ -41,7 +41,7 @@ namespace CodeBase.Infrastructure.Factories
         {
             Canvas prefab = await _addressablesLoader.LoadComponent<Canvas>(_uiAddresses.Canvas);
             
-            return _objectResolver.Instantiate(prefab);
+            return _objectResolver.Instantiate(prefab, null, false);
         }
         
         private async UniTask<Joystick> CreateJoystick(Canvas canvas)

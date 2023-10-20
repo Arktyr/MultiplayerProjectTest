@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 566615262895444fbfa84783c87e89e8, type: 3}
-  m_Name: AllAssetsAddresses
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: UI_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  SceneAddresses: {fileID: 11400000, guid: c545f616b49dff6428c87d8503f71ab5, type: 2}
-  UIAddresses: {fileID: 11400000, guid: 476e83c077431294e890e1792d2d4946, type: 2}
+  m_Group: {fileID: 11400000, guid: 0cfd0eeb135e88f4798c14493c3edc21, type: 2}
+  m_StaticContent: 0

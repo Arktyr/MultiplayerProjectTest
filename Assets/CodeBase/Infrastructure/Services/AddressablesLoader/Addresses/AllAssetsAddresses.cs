@@ -1,4 +1,5 @@
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Scenes;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.UI;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
@@ -7,5 +8,6 @@ namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
     public class AllAssetsAddresses : ScriptableObject
     {
         public SceneAddresses SceneAddresses;
+        public UIAddresses UIAddresses;
     }
 }

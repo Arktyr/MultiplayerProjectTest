@@ -17,17 +17,9 @@ namespace CodeBase.Common.FSM
             if (_states[typeof(TState)] is TState state)
             {
                 _activeState = state;
-                
+
                 state.Enter();
             }
-        }
-
-        public void Enter<TState, TArgs>(TArgs args) where TState : IStateWithArgument<TArgs>
-        {
-            _activeState?.Exit();
-
-            if (_states[typeof(TState)] is TState state) 
-                state.Enter(args);
         }
 
         public void AddState<TState>(TState state) where TState : IExitableState => 

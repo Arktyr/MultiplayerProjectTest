@@ -1,6 +1,5 @@
 ﻿using CodeBase.Infrastructure.StateMachines.App.FSM;
 using CodeBase.Infrastructure.StateMachines.App.States;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace CodeBase.Infrastructure.StateMachines.App

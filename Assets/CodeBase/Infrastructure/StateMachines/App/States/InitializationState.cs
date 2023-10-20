@@ -14,8 +14,6 @@ namespace CodeBase.Infrastructure.StateMachines.App.States
 
         public void Enter()
         {
-          
-            
             _appStateMachine.Enter<GameplayState>();
         }
 

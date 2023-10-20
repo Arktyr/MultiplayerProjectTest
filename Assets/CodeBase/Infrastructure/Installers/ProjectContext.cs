@@ -1,3 +1,5 @@
+using CodeBase.Infrastructure.Services;
+using CodeBase.Infrastructure.Services.Logger;
 using CodeBase.Infrastructure.StateMachines.App.FSM;
 using CodeBase.Infrastructure.StateMachines.App.States;
 using VContainer;
@@ -10,6 +12,12 @@ namespace CodeBase.Infrastructure.Installers
         protected override void Configure(IContainerBuilder builder)
         {
             BindStateMachine(builder);
+            BindServices(builder);
+        }
+
+        private void BindServices(IContainerBuilder builder)
+        {
+            builder.Register<ICustomLogger, CustomLogger>(Lifetime.Singleton);
         }
 
         private void BindStateMachine(IContainerBuilder builder)

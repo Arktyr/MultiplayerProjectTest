@@ -9,7 +9,8 @@ namespace CodeBase.Infrastructure.Installers
 {
     public class LevelInstaller : LifetimeScope
     {
-        [SerializeField] private Transform _attractive;
+        [SerializeField] private GameObject _attractive;
+        [SerializeField] private Rigidbody _attraction;
         
         protected override void Configure(IContainerBuilder builder)
         {
@@ -25,7 +26,8 @@ namespace CodeBase.Infrastructure.Installers
 
             builder
                 .Register<IGravityAttraction, GravityAttraction>(Lifetime.Singleton)
-                .WithParameter(_attractive);
+                .WithParameter(_attractive)
+                .WithParameter(_attraction);
         }
 
         private void BindFactories(IContainerBuilder builder)

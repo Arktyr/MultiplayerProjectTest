@@ -1,32 +1,38 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
+using CodeBase.Infrastructure.Services.Updater;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Services.Gravity
 {
     public class GravityAttraction : IGravityAttraction
     {
+        private ITickableService _tickableService;
+        
         private readonly GameObject _attractive;
         private Vector3 _gravityDirection;
 
-        private float _gravityStrength;
-        private float _timeToRotate;
+        private readonly float _gravityStrength;
+        private readonly float _timeToRotate;
         
-        public GravityAttraction(GameObject attractive)
+        public GravityAttraction(GameObject attractive,
+            ITickableService tickableService,
+            IStaticDataProvider staticDataProvider)
         {
             _attractive = attractive;
+            _tickableService = tickableService;
+            
+            _gravityStrength = staticDataProvider.GameBalanceData.GravityConfig.GravityStrength;
+            _timeToRotate = staticDataProvider.GameBalanceData.GravityConfig.TimeToRotate;
         }
 
         private readonly List<Rigidbody> _attractionObjects = new();
 
-        public void Enable()
-        {
-            
-        }
+        public void Enable() => 
+            _tickableService.FixedTicked += Attract;
 
-        public void Disable()
-        {
-            
-        }
+        public void Disable() => 
+            _tickableService.FixedTicked -= Attract;
 
         public void RemoveObjectFromAttraction(Rigidbody attraction) => 
             _attractionObjects.Remove(attraction);
@@ -42,7 +48,7 @@ namespace CodeBase.Gameplay.Services.Gravity
                     RemoveObjectFromAttraction(attraction);
                 
                 _gravityDirection = (attraction.position - _attractive.transform.position).normalized;
-                
+
                 attraction.AddForce(_gravityDirection * _gravityStrength);
         
                 Rotate(attraction);

@@ -1,6 +1,6 @@
 namespace CodeBase.Infrastructure.Factories
 {
-    public interface ICommonUIFactory
+    public interface IJoystickFactory
     {
     }
 }

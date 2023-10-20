@@ -1,10 +1,10 @@
 using Cysharp.Threading.Tasks;
-using VContainer.Unity;
 
-namespace CodeBase.Gameplay.Spawner
+namespace CodeBase.Gameplay.Services.Spawner
 {
     public interface ILevelSpawner
     {
+        public UniTask WarmUp();
         public UniTask Spawn();
     }
 }

@@ -1,4 +1,4 @@
-﻿using CodeBase.Gameplay.Spawner;
+﻿using CodeBase.Gameplay.Services.Spawner;
 using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider

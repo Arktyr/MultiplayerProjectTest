@@ -1,8 +1,8 @@
 ﻿using CodeBase.Common.FSM.States;
-using CodeBase.Gameplay.Spawner;
+using CodeBase.Gameplay.Services.Spawner;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using CodeBase.Infrastructure.Services.SceneLoader;
-using CodeBase.Infrastructure.Services.Updater;
+using CodeBase.Infrastructure.Services.Tickable;
 using CodeBase.Infrastructure.StateMachines.App.FSM;
 using Cysharp.Threading.Tasks;
 
@@ -40,6 +40,7 @@ namespace CodeBase.Infrastructure.StateMachines.App.States
         {
             ILevelSpawner levelSpawner = await _levelSpawnerProvider.GetSpawner();
 
+            await levelSpawner.WarmUp();
             await levelSpawner.Spawn();
         }
 

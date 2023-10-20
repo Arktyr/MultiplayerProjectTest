@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
-using CodeBase.Infrastructure.Services.Updater;
+using CodeBase.Infrastructure.Services.Tickable;
 using UnityEngine;
 
 namespace CodeBase.Gameplay.Services.Gravity

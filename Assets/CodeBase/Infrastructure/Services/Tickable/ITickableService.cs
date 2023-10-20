@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeBase.Infrastructure.Services.Updater
+namespace CodeBase.Infrastructure.Services.Tickable
 {
     public interface ITickableService
     {

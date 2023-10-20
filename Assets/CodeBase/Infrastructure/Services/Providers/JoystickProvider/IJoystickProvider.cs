@@ -1,6 +1,6 @@
-using UnityEngine;
+using CodeBase.Gameplay.Input.Joysticks;
 
-namespace CodeBase.Infrastructure.Services.Providers.UIProvider
+namespace CodeBase.Infrastructure.Services.Providers.JoystickProvider
 {
     public interface IJoystickProvider
     {

@@ -1,8 +1,7 @@
 ﻿using System;
-using UnityEngine;
 using VContainer.Unity;
 
-namespace CodeBase.Infrastructure.Services.Updater
+namespace CodeBase.Infrastructure.Services.Tickable
 {
     public class TickableService : ITickableService, ITickable, IFixedTickable, ILateTickable
     {

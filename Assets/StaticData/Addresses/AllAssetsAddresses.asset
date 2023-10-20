@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: AllAssetsAddresses
   m_EditorClassIdentifier: 
   SceneAddresses: {fileID: 11400000, guid: c545f616b49dff6428c87d8503f71ab5, type: 2}
-  UIAddresses: {fileID: 11400000, guid: 476e83c077431294e890e1792d2d4946, type: 2}
+  joystickAddresses: {fileID: 11400000, guid: 896cfb89d2a8b2e4ab452590493d52a5, type: 2}
+  CharacterAddresses: {fileID: 0}

@@ -1,7 +1,9 @@
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.Logger;
+using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using CodeBase.Infrastructure.StateMachines.App.FSM;
 using CodeBase.Infrastructure.StateMachines.App.States;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -9,6 +11,8 @@ namespace CodeBase.Infrastructure.Installers
 {
     public class ProjectContext : LifetimeScope
     {
+        [SerializeField] private AllAssetsData _allAssetsData;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             BindStateMachine(builder);
@@ -18,6 +22,9 @@ namespace CodeBase.Infrastructure.Installers
         private void BindServices(IContainerBuilder builder)
         {
             builder.Register<ICustomLogger, CustomLogger>(Lifetime.Singleton);
+
+            builder.Register<IStaticDataProvider, StaticDataProvider>(Lifetime.Singleton)
+                .WithParameter(_allAssetsData);
         }
 
         private void BindStateMachine(IContainerBuilder builder)

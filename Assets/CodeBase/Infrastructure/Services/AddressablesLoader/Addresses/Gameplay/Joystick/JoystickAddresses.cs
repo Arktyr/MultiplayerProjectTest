@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick
 {
-    [CreateAssetMenu(menuName = "StaticData/Addresses/Joystick", fileName = "JoystickAddresses")]
+    [CreateAssetMenu(menuName = "StaticData/Addresses/Gameplay/Joystick", fileName = "JoystickAddresses")]
     public class JoystickAddresses : ScriptableObject
     {
         public AssetReferenceGameObject Canvas;

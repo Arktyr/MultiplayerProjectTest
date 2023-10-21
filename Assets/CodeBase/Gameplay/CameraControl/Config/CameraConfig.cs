@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.CameraControl.Config
 {
-    [CreateAssetMenu(menuName = "StaticData/Balance/Config/Camera", fileName = "CameraConfig")]
+    [CreateAssetMenu(menuName = "StaticData/Balance/Configs/Camera", fileName = "CameraConfig")]
     public class CameraConfig : ScriptableObject
     {
         public bool IsLookedAtCharacter;

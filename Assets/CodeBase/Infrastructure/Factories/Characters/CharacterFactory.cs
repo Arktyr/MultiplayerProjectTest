@@ -50,6 +50,18 @@ namespace CodeBase.Infrastructure.Factories.Characters
 
             SetupCharacterMovement(gameObject);
 
+            CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
+            GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Body);
+            GameObject gameObject1 = _objectResolver.Instantiate(prefab);
+            GameObject gameObject2 = _objectResolver.Instantiate(prefab);
+            GameObject gameObject3 = _objectResolver.Instantiate(prefab);
+            BodyParts bodyPiece1 = gameObject1.GetComponent<BodyParts>();
+            BodyParts bodyPiece2 = gameObject2.GetComponent<BodyParts>();
+            BodyParts bodyPiece3 = gameObject3.GetComponent<BodyParts>();
+            characterBody.AddBodyPiece(bodyPiece1);
+            characterBody.AddBodyPiece(bodyPiece2);
+            characterBody.AddBodyPiece(bodyPiece3);
+
             Character character = SetupCharacter(gameObject);
             _characterProvider.SetCharacter(character);
             

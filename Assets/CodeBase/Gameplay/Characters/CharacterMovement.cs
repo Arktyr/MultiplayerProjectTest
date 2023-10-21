@@ -1,3 +1,4 @@
+using System;
 using CodeBase.Gameplay.Input.Joysticks;
 using UnityEngine;
 
@@ -5,14 +6,13 @@ namespace CodeBase.Gameplay.Characters
 {
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] private Movement _movement;
-        [SerializeField] private Rotate _rotate;
-        
+        [SerializeField] private BodyParts _headParts;
+
         private Joystick _joystick;
 
         private float _speed;
         private float _rotatingSpeed;
-        
+
         public void Construct(Joystick joystick,
             float speed,
             float rotatingSpeed)
@@ -26,11 +26,27 @@ namespace CodeBase.Gameplay.Characters
         public void Move()
         {
             Vector3 inputDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
+
+            if (inputDirection.magnitude > 0.1f) 
+                Rotate(inputDirection);
+
+            Rigidbody bodyAttractionPart = _headParts.BodyAttractionPart;
             
-            if (inputDirection.magnitude > 0.1f)
-                _rotate.RotateForward(inputDirection, _rotatingSpeed);
+            _headParts.BodyAttractionPart.MovePosition(bodyAttractionPart.position +
+                                                      _headParts.BodyInputRotatingPart.transform.forward *
+                                                      _speed * Time.deltaTime);
+       
+        }
+
+        private void Rotate(Vector3 inputDirection)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(inputDirection);
+
+            Transform bodyInputRotatingPart = _headParts.BodyInputRotatingPart;
             
-            _movement.Move(_speed);
+            bodyInputRotatingPart.localRotation =
+                Quaternion.Slerp(bodyInputRotatingPart.localRotation, targetRotation,
+                    _rotatingSpeed * Time.deltaTime); 
         }
     }
 }

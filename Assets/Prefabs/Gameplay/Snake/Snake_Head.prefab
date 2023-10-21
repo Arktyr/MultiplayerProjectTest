@@ -347,10 +347,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5592284754490697505}
   - component: {fileID: 3433918230662113015}
-  - component: {fileID: 4055578268184618457}
-  - component: {fileID: 4712585621900359005}
   - component: {fileID: 4298001030677254775}
   - component: {fileID: -4663051344170647864}
+  - component: {fileID: -6596964082430560492}
+  - component: {fileID: 2583513061484011201}
   m_Layer: 0
   m_Name: Snake_Head
   m_TagString: Untagged
@@ -391,32 +391,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &4055578268184618457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102606924192447899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b12aed5cefb4cf8bffe024910364198, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotatingPart: {fileID: 3542956352893351871}
---- !u!114 &4712585621900359005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5102606924192447899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f3f7991bc4949a5b8c268c4844ec1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rotatingPart: {fileID: 3542956352893351871}
 --- !u!114 &4298001030677254775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,8 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726cd44201c34afab08cd329cdc065bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 4055578268184618457}
-  _rotate: {fileID: 4712585621900359005}
+  _headParts: {fileID: 2583513061484011201}
 --- !u!114 &-4663051344170647864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +417,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CharacterMovement>k__BackingField: {fileID: 4298001030677254775}
+  <CharacterBody>k__BackingField: {fileID: -6596964082430560492}
+--- !u!114 &-6596964082430560492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102606924192447899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4caf07d3b6b24481997e231b610d2061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headParts: {fileID: 2583513061484011201}
+--- !u!114 &2583513061484011201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5102606924192447899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8993565e92cf46c991021251a339c347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BodyAttractionPart: {fileID: 3433918230662113015}
+  BodyInputRotatingPart: {fileID: 3542956352893351871}
 --- !u!1 &5359061312454056764
 GameObject:
   m_ObjectHideFlags: 0

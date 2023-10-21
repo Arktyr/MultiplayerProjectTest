@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GravityConfig: {fileID: 11400000, guid: 564479e18e1db1e42aed183eeed28e47, type: 2}
   CharacterConfig: {fileID: 11400000, guid: aa023b5d2519fc140bf314a40cceb5cc, type: 2}
+  CameraConfig: {fileID: 11400000, guid: ffbcdca93c53eef4d827fb42fd27c723, type: 2}

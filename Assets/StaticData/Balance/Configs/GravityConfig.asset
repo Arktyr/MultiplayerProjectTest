@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5beddf2bbd0471ca4eaeed5454d0d8c, type: 3}
   m_Name: GravityConfig
   m_EditorClassIdentifier: 
-  GravityStrength: -150
+  GravityStrength: -80
   TimeToRotate: 100

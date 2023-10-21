@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 89a185fa4915db04ca4338c07342e876
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 36491c8d062c95e4b996185c0174e352
+    m_Address: Assets/Prefabs/Gameplay/Camera/Camera.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c996352bb2c7204fbc4f430278820dc, type: 2}
   m_SchemaSet:

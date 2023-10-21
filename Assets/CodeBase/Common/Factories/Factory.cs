@@ -1,4 +1,5 @@
-﻿using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
+﻿using System.ComponentModel;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using Cysharp.Threading.Tasks;
 using VContainer;
 

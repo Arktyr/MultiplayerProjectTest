@@ -35,7 +35,7 @@ namespace CodeBase.Infrastructure.Factories.Characters
             _joystickProvider = joystickProvider;
             _characterProvider = characterProvider;
 
-            _characterAddresses = staticDataProvider.AllAssetsAddresses.allGameplayAddresses.DynamicObjectsAddresses
+            _characterAddresses = staticDataProvider.AllAssetsAddresses.AllGameplayAddresses.DynamicObjectsAddresses
                 .CharacterAddresses;
             _characterConfig = staticDataProvider.GameBalanceData.CharacterConfig;
         }

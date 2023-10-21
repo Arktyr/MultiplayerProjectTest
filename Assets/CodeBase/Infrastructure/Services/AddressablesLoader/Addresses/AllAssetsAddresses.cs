@@ -10,7 +10,7 @@ namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
     public class AllAssetsAddresses : ScriptableObject
     {
         public SceneAddresses SceneAddresses;
-        public AllGameplayAddresses allGameplayAddresses;
+        public AllGameplayAddresses AllGameplayAddresses;
         public AssetReferenceGameObject Camera;
     }
 }

@@ -12,7 +12,7 @@ using VContainer.Unity;
 
 namespace CodeBase.Infrastructure.Factories.Characters.Camera
 {
-    public class CameraFactory : Factory, ICameraFactory
+    public class CameraFactory : Factory, ICameraFactory 
     {
         private readonly ICharacterProvider _characterProvider;
         

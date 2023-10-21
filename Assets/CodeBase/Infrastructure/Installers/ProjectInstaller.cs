@@ -3,6 +3,7 @@ using CodeBase.Infrastructure.Factories.Joysticks;
 using CodeBase.Infrastructure.Services;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Logger;
+using CodeBase.Infrastructure.Services.Providers.CharacterProvider;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
@@ -38,6 +39,7 @@ namespace CodeBase.Infrastructure.Installers
             builder.Register<IAddressablesLoader, AddressablesLoader>(Lifetime.Singleton);
             builder.Register<IJoystickFactory, JoystickFactory>(Lifetime.Singleton);
 
+            builder.Register<ICharacterProvider, CharacterProvider>(Lifetime.Singleton);
             builder.Register<ILevelSpawnerProvider, LevelSpawnerProvider>(Lifetime.Singleton);
             builder.Register<IJoystickProvider, JoystickProvider>(Lifetime.Singleton);
             

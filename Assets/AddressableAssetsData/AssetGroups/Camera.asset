@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Character
+  m_Name: Camera
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Camera
   m_Data:
     m_SerializedData: []
-  m_GUID: e8b4a91d52db74b4caa3eb8793f3512a
+  m_GUID: 89a185fa4915db04ca4338c07342e876
   m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c996352bb2c7204fbc4f430278820dc, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: b6099608298143f419e240eb05cad3e2, type: 2}
-    - {fileID: 11400000, guid: 8da24467e7b62f64280f6d95eee2c60a, type: 2}
+    - {fileID: 11400000, guid: 42bbb7b469a01b54d96e7b2024de0992, type: 2}
+    - {fileID: 11400000, guid: 9b41d53af884d094198421c1bf407c31, type: 2}

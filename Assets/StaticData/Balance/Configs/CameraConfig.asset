@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
-  m_Name: Character_ContentUpdateGroupSchema
+  m_Script: {fileID: 11500000, guid: a7219d91423e4bd3bb75abef75a00889, type: 3}
+  m_Name: CameraConfig
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: 8daf6c83c4062264dba5b1986c11a1f6, type: 2}
-  m_StaticContent: 0
+  IsLookedAtCharacter: 0
+  Offset: {x: 0, y: 0, z: 0}

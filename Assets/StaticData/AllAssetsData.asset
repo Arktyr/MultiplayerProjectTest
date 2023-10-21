@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: AllAssetsData
   m_EditorClassIdentifier: 
   AllAssetsAddresses: {fileID: 11400000, guid: 57fdddf52b451eb4fb779690fc927c3c, type: 2}
+  GameBalanceData: {fileID: 11400000, guid: c38797e721e473f41a3a40b30b71e4ad, type: 2}

@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b27aff86f9c481b88629eccc538c89c, type: 3}
   m_Name: GameBalanceData
   m_EditorClassIdentifier: 
-  GravityConfig: {fileID: 0}
+  GravityConfig: {fileID: 11400000, guid: 564479e18e1db1e42aed183eeed28e47, type: 2}
+  CharacterConfig: {fileID: 11400000, guid: aa023b5d2519fc140bf314a40cceb5cc, type: 2}

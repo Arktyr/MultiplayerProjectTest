@@ -24,7 +24,7 @@ namespace CodeBase.Infrastructure.Factories.Joysticks
             : base(objectResolver, addressablesLoader)
         {
             _joystickProvider = joystickProvider;
-            joystickAddresses = staticDataProvider.AllAssetsAddresses.JoystickAddresses;
+            joystickAddresses = staticDataProvider.AllAssetsAddresses.allGameplayAddresses.JoystickAddresses;
         }
 
         public override async UniTask WarmUp()

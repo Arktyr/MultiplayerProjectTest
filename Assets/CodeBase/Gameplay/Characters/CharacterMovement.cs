@@ -3,24 +3,22 @@ using UnityEngine;
 
 namespace CodeBase.Gameplay.Characters
 {
-    public class CharacterMovement
+    public class CharacterMovement : MonoBehaviour
     {
+        [SerializeField] private Movement _movement;
+        [SerializeField] private Rotate _rotate;
+        
         private Joystick _joystick;
-        private Movement _movement;
-        private Rotate _rotate;
 
         private float _speed;
         private float _rotatingSpeed;
         
         public void Construct(Joystick joystick,
-            Movement movement,
-            Rotate rotate,
             float speed,
             float rotatingSpeed)
         {
             _joystick = joystick;
-            _movement = movement;
-            _rotate = rotate;
+           
             _speed = speed;
             _rotatingSpeed = rotatingSpeed;
         }
@@ -29,7 +27,7 @@ namespace CodeBase.Gameplay.Characters
         {
             Vector3 inputDirection = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
             
-            if (inputDirection.magnitude > 0)
+            if (inputDirection.magnitude > 0.1f)
                 _rotate.RotateForward(inputDirection, _rotatingSpeed);
             
             _movement.Move(_speed);

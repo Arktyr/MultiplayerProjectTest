@@ -2,6 +2,7 @@ using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Scenes;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
 {
@@ -9,7 +10,9 @@ namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
     public class AllAssetsAddresses : ScriptableObject
     {
         public SceneAddresses SceneAddresses;
-        public JoystickAddresses joystickAddresses;
+        public JoystickAddresses JoystickAddresses;
         public CharacterAddresses CharacterAddresses;
+        
+        public AssetReferenceGameObject Camera;
     }
 }

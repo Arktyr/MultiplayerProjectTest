@@ -3,6 +3,7 @@ using CodeBase.Gameplay.Services.Gravity;
 using CodeBase.Gameplay.Services.Spawner;
 using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Factories.Characters;
+using CodeBase.Infrastructure.Factories.Characters.Camera;
 using CodeBase.Infrastructure.Factories.Joysticks;
 using UnityEngine;
 using VContainer;
@@ -37,6 +38,7 @@ namespace CodeBase.Infrastructure.Installers
         {
             builder.Register<IJoystickFactory, JoystickFactory>(Lifetime.Singleton);
             builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
+            builder.Register<ICameraFactory, CameraFactory>(Lifetime.Singleton);
         }
     }
 }

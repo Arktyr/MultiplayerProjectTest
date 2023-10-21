@@ -5,6 +5,7 @@ using CodeBase.Gameplay.Input.Joysticks;
 using CodeBase.Gameplay.Services.Gravity;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
+using CodeBase.Infrastructure.Services.Providers.CharacterProvider;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace CodeBase.Infrastructure.Factories.Characters
         private readonly IGravityAttraction _gravityAttraction;
         private readonly CharacterAddresses _characterAddresses;
         private readonly IJoystickProvider _joystickProvider;
+        private readonly ICharacterProvider _characterProvider;
 
         private readonly CharacterConfig _characterConfig;
 
@@ -26,10 +28,12 @@ namespace CodeBase.Infrastructure.Factories.Characters
             IAddressablesLoader addressablesLoader,
             IGravityAttraction gravityAttraction,
             IJoystickProvider joystickProvider,
+            ICharacterProvider characterProvider,
             IStaticDataProvider staticDataProvider) : base(objectResolver, addressablesLoader)
         {
             _gravityAttraction = gravityAttraction;
             _joystickProvider = joystickProvider;
+            _characterProvider = characterProvider;
             
             _characterAddresses = staticDataProvider.AllAssetsAddresses.CharacterAddresses;
             _characterConfig = staticDataProvider.GameBalanceData.CharacterConfig;
@@ -44,43 +48,39 @@ namespace CodeBase.Infrastructure.Factories.Characters
         {
             GameObject gameObject = await CreateGameObject();
 
-            CharacterMovement characterMovement = CreateMovement(gameObject);
+            SetupCharacterMovement(gameObject);
 
-            CreateCharacter(characterMovement);
-
+            Character character = SetupCharacter(gameObject);
+            _characterProvider.SetCharacter(character);
+            
             Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
             _gravityAttraction.AddObjectToAttraction(rigidbody);
         }
 
-        public async UniTask<GameObject> CreateGameObject()
+        private async UniTask<GameObject> CreateGameObject()
         {
             GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Head);
 
             return _objectResolver.Instantiate(prefab);
         }
 
-        private Character CreateCharacter(CharacterMovement characterMovement)
+        private Character SetupCharacter(GameObject gameObject)
         {
-            Character character = new Character();
-            character.Construct(characterMovement);
+            Character character = gameObject.GetComponent<Character>();
             _objectResolver.Inject(character);
             character.Initialize();
 
             return character;
         }
 
-        public CharacterMovement CreateMovement(GameObject gameObject)
+        private void SetupCharacterMovement(GameObject gameObject)
         {
-            CharacterMovement characterMovement = new CharacterMovement();
+            CharacterMovement characterMovement = gameObject.GetComponent<CharacterMovement>();
             
-            Movement movement = gameObject.GetComponent<Movement>();
-            Rotate rotate = gameObject.GetComponent<Rotate>();
             Joystick joystick = _joystickProvider.Joystick;
             
-            characterMovement.Construct(joystick, movement, rotate, _characterConfig.Speed,
+            characterMovement.Construct(joystick, _characterConfig.Speed,
                 _characterConfig.RotatingSpeed);
-
-            return characterMovement;
         }
     }
 }

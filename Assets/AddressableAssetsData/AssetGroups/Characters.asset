@@ -12,11 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Characters
   m_EditorClassIdentifier: 
-  m_GroupName: dfs
+  m_GroupName: Characters
   m_Data:
     m_SerializedData: []
   m_GUID: e8b4a91d52db74b4caa3eb8793f3512a
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 5f2b0bef78b7f20428483f4768d1aa28
+    m_Address: Assets/Prefabs/Gameplay/Snake/Snake_Head.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53e1e85140ab0254894d7306ddd7325a
+    m_Address: Assets/Prefabs/Gameplay/Snake/Snake_Body 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c996352bb2c7204fbc4f430278820dc, type: 2}
   m_SchemaSet:

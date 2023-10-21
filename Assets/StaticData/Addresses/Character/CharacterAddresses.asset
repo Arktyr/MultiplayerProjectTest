@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CharacterAddresses
   m_EditorClassIdentifier: 
   Head:
-    m_AssetGUID: 
+    m_AssetGUID: 5f2b0bef78b7f20428483f4768d1aa28
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   Body:
-    m_AssetGUID: 
+    m_AssetGUID: 53e1e85140ab0254894d7306ddd7325a
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

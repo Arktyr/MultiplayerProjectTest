@@ -14,15 +14,18 @@ namespace CodeBase.Gameplay.Characters
             _tickableService = tickableService;
         
         [field: SerializeField] public CharacterMovement CharacterMovement { get; private set; }
+        [field: SerializeField] public CharacterBody CharacterBody { get; private set; }
         
         public void Initialize()
         {
             _tickableService.FixedTicked += CharacterMovement.Move;
+            _tickableService.FixedTicked += CharacterBody.ShiftPieces;
         }
 
         private void OnDestroy()
         {
             _tickableService.FixedTicked -= CharacterMovement.Move;
+            _tickableService.FixedTicked -= CharacterBody.ShiftPieces;
         }
     }
 }

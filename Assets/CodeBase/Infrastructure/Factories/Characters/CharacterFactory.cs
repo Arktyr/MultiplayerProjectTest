@@ -8,6 +8,7 @@ using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Providers.CharacterProvider;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
+using Codice.Client.BaseCommands;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -50,6 +51,19 @@ namespace CodeBase.Infrastructure.Factories.Characters
             GameObject gameObject = await CreateGameObject();
 
             SetupCharacterMovement(gameObject);
+
+            CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
+            GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Body);
+            GameObject gameObject1 = _objectResolver.Instantiate(prefab);
+            GameObject gameObject2 = _objectResolver.Instantiate(prefab);
+            GameObject gameObject3 = _objectResolver.Instantiate(prefab);
+            BodyParts bodyParts1 = gameObject1.GetComponent<BodyParts>();
+            BodyParts bodyParts2 = gameObject2.GetComponent<BodyParts>();
+            BodyParts bodyParts3 = gameObject3.GetComponent<BodyParts>();
+            characterBody.AddBodyPiece(bodyParts1);
+            characterBody.AddBodyPiece(bodyParts2);
+            characterBody.AddBodyPiece(bodyParts3);
+            
 
             Character character = SetupCharacter(gameObject);
             _characterProvider.SetCharacter(character);

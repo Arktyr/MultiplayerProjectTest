@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Apple
   m_Data:
     m_SerializedData: []
   m_GUID: bfa4975831163384dabac26024d0e636
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 7ba4f0557a71f0545baf81b6004e3a12
+    m_Address: Assets/Prefabs/Gameplay/Apple/Apple.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9c996352bb2c7204fbc4f430278820dc, type: 2}
   m_SchemaSet:

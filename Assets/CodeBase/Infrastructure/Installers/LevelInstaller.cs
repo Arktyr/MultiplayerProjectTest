@@ -1,7 +1,10 @@
 ﻿using CodeBase.Gameplay.Characters;
 using CodeBase.Gameplay.Services.Gravity;
+using CodeBase.Gameplay.Services.Pool;
 using CodeBase.Gameplay.Services.Spawner;
+using CodeBase.Gameplay.Services.Spawners.Apples;
 using CodeBase.Infrastructure.Factories;
+using CodeBase.Infrastructure.Factories.Apples;
 using CodeBase.Infrastructure.Factories.Characters;
 using CodeBase.Infrastructure.Factories.Characters.Camera;
 using CodeBase.Infrastructure.Factories.Joysticks;
@@ -32,6 +35,11 @@ namespace CodeBase.Infrastructure.Installers
                 .Register<IGravityAttraction, GravityAttraction>(Lifetime.Singleton)
                 .WithParameter(_attractive)
                 .WithParameter(_attraction);
+            
+            builder.Register<IApplePool, ApplePool>(Lifetime.Singleton);
+            builder
+                .Register<IAppleSpawner, AppleSpawner>(Lifetime.Singleton)
+                .WithParameter(_attractive);
         }
 
         private void BindFactories(IContainerBuilder builder)
@@ -39,6 +47,7 @@ namespace CodeBase.Infrastructure.Installers
             builder.Register<IJoystickFactory, JoystickFactory>(Lifetime.Singleton);
             builder.Register<ICharacterFactory, CharacterFactory>(Lifetime.Singleton);
             builder.Register<ICameraFactory, CameraFactory>(Lifetime.Singleton);
+            builder.Register<IAppleFactory, AppleFactory>(Lifetime.Singleton);
         }
     }
 }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1573c9952c345b78c40d51e182807ab, type: 3}
   m_Name: DynamicObjectAddresses
   m_EditorClassIdentifier: 
-  CharacterAddresses: {fileID: 0}
+  CharacterAddresses: {fileID: 11400000, guid: ce9dbccadd3db3f4181e6272700ff36b, type: 2}
   Apple:
-    m_AssetGUID: 
+    m_AssetGUID: 7ba4f0557a71f0545baf81b6004e3a12
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

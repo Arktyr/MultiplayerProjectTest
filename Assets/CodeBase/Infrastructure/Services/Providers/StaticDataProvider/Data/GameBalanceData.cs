@@ -3,6 +3,7 @@ using CodeBase.Gameplay.CameraControl.Config;
 using CodeBase.Gameplay.Characters.Config;
 using CodeBase.Gameplay.Services.Gravity;
 using CodeBase.Gameplay.Services.Gravity.Config;
+using CodeBase.Gameplay.Services.Spawners.Apples;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data
@@ -13,5 +14,6 @@ namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data
         public GravityConfig GravityConfig;
         public CharacterConfig CharacterConfig;
         public CameraConfig CameraConfig;
+        public AppleSpawnerConfig AppleSpawnerConfig;
     }
 }

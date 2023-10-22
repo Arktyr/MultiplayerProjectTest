@@ -8,7 +8,12 @@ namespace CodeBase.Gameplay.Services.Pool
     public class ApplePool : Pool<Apple>, IApplePool
     {
         private readonly IAppleFactory _appleFactory;
-        
+
+        public ApplePool(IAppleFactory appleFactory)
+        {
+            _appleFactory = appleFactory;
+        }
+
         protected override async UniTask AddToPool()
         {
             Apple gameObject = await _appleFactory.Create();
@@ -23,7 +28,7 @@ namespace CodeBase.Gameplay.Services.Pool
 
         protected override void PrepareToDisableObject(Apple activeObject)
         {
-            activeObject.PickUpped += ReturnToPool;
+            activeObject.PickUpped -= ReturnToPool;
             activeObject.gameObject.SetActive(false);
         }
     }

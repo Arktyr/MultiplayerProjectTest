@@ -35,7 +35,6 @@ namespace CodeBase.Gameplay.Characters
             _headParts.BodyAttractionPart.MovePosition(bodyAttractionPart.position +
                                                       _headParts.BodyInputRotatingPart.transform.forward *
                                                       _speed * Time.deltaTime);
-       
         }
 
         private void Rotate(Vector3 inputDirection)

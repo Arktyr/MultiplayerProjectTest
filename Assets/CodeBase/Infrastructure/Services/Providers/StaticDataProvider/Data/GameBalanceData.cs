@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.CameraControl;
+﻿using CodeBase.Gameplay.Apples.Config;
+using CodeBase.Gameplay.CameraControl;
 using CodeBase.Gameplay.CameraControl.Config;
 using CodeBase.Gameplay.Characters.Config;
 using CodeBase.Gameplay.Services.Gravity;
@@ -12,6 +13,7 @@ namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data
     public class GameBalanceData : ScriptableObject
     {
         public GravityConfig GravityConfig;
+        public AppleAttractionConfig AppleAttractionConfig;
         public CharacterConfig CharacterConfig;
         public CameraConfig CameraConfig;
         public AppleSpawnerConfig AppleSpawnerConfig;

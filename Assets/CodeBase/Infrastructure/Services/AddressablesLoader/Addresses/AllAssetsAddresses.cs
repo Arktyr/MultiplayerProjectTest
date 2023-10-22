@@ -1,4 +1,3 @@
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Scenes;
 using UnityEngine;
@@ -12,5 +11,6 @@ namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
         public SceneAddresses SceneAddresses;
         public AllGameplayAddresses AllGameplayAddresses;
         public AssetReferenceGameObject Camera;
+        public AssetReferenceGameObject EmptyObject;
     }
 }

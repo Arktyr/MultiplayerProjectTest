@@ -1,3 +1,4 @@
+using CodeBase.Gameplay.Characters;
 using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Infrastructure.Factories.Characters
@@ -7,5 +8,6 @@ namespace CodeBase.Infrastructure.Factories.Characters
         public UniTask WarmUp();
 
         public UniTask Create();
+        public UniTask<BodyParts> CreateBodyPart();
     }
 }

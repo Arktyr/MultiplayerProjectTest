@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using CodeBase.Gameplay.Services.Pool;
+using CodeBase.Infrastructure.Factories.Apples;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,22 +11,23 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
     {
         private readonly GameObject _ground;
         private readonly Mesh _mesh;
-        private readonly IApplePool _applePool;
 
         private readonly float _maximumApplesOnLevel;
         private readonly float _distanceFromMesh;
 
+        private readonly IAppleFactory _appleFactory;
+
         private Vector3 _currentNormal;
         
-        public AppleSpawner(GameObject ground, 
-            IApplePool applePool,
+        public AppleSpawner(GameObject ground,
+            IAppleFactory appleFactory,
             IStaticDataProvider staticDataProvider)
         {
             _ground = ground;
             _mesh = _ground.GetComponent<MeshFilter>().mesh;
-            
-            _applePool = applePool;
-            
+
+            _appleFactory = appleFactory;
+
             _maximumApplesOnLevel = staticDataProvider.GameBalanceData.AppleSpawnerConfig.MaximumApplesOnLevel;
             _distanceFromMesh = staticDataProvider.GameBalanceData.AppleSpawnerConfig.DistanceFromMesh;
         }
@@ -35,7 +37,7 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
         public async UniTask SpawnApples()
         {
             for (int i = 0; i < _maximumApplesOnLevel; i++) 
-                await SpawnApple();
+                await SpawnApple(await _appleFactory.Create());
         }
 
         private async UniTask<Vector3> GetRandomPointForSpawn()
@@ -69,12 +71,11 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
             activeApple.PickUpped -= RespawnApple;
             _positionOccupied.Remove(activeApple.transform.position);
             
-            await SpawnApple();
+            await SpawnApple(activeApple);
         }
         
-        private async UniTask SpawnApple()
+        private async UniTask SpawnApple(Apple apple)
         {
-            Apple apple = await _applePool.Take();
             Transform transform = apple.transform;
             
             Vector3 randomPosition = await GetRandomPointForSpawn();

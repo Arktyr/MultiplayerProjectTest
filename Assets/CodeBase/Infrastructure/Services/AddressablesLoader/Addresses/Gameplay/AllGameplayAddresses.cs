@@ -1,4 +1,3 @@
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick;
 using UnityEngine;
 

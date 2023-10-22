@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CodeBase.Gameplay.Services.Pool;
+using CodeBase.Gameplay.Apples;
 using CodeBase.Infrastructure.Factories.Apples;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;
@@ -42,28 +42,21 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
 
         private async UniTask<Vector3> GetRandomPointForSpawn()
         {
-            Vector2[] uvCoordinates = _mesh.uv;
-            Vector3[] normals = _mesh.normals;
+            Vector3[] vertices = _mesh.vertices;
             
-            int randomVertexIndex = Random.Range(0, _mesh.vertices.Length);
-            Vector3 randomPoint = _ground.transform.TransformPoint(_mesh.vertices[randomVertexIndex]);
-
-            Vector2 uvCoordinate = uvCoordinates[randomVertexIndex];
-            Vector3 normal = normals[randomVertexIndex];
-
-            if (IsOnTexture(uvCoordinate))
-            {
-                randomPoint += normal * _distanceFromMesh;
-
-                if (_positionOccupied.Contains(randomPoint))
-                    return await GetRandomPointForSpawn();
-
-                _currentNormal = normal;
-                
-                return randomPoint;
-            }
+            Vector3 randomVertex = vertices[Random.Range(0, vertices.Length)];
+            Vector3 randomPoint = _ground.transform.TransformPoint(randomVertex);
             
-            return Vector3.zero;
+            Vector3 offset = randomPoint * _distanceFromMesh;
+            Vector3 finalPoint = randomPoint + offset;
+
+            if (_positionOccupied.Contains(finalPoint))
+                return await GetRandomPointForSpawn();
+
+            _currentNormal = (finalPoint - _ground.transform.position).normalized;
+            
+            _positionOccupied.Add(finalPoint);
+            return finalPoint;
         }
 
         private async void RespawnApple(Apple activeApple)
@@ -81,13 +74,11 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
             Vector3 randomPosition = await GetRandomPointForSpawn();
 
             transform.position = randomPosition;
-            apple.transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - _currentNormal);
+            apple.transform.rotation = Quaternion.FromToRotation(Vector3.up, _currentNormal);
             _positionOccupied.Add(randomPosition);
+            apple.gameObject.SetActive(true);
             
             apple.PickUpped += RespawnApple;
         }
-        
-        private bool IsOnTexture(Vector2 uvCoord) => 
-            uvCoord.x >= 0 && uvCoord.x <= 1 && uvCoord.y >= 0 && uvCoord.y <= 1;
     }
 }

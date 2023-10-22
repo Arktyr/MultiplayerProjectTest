@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay.Character;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

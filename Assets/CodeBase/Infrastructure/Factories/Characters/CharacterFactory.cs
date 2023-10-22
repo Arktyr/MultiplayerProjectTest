@@ -3,7 +3,7 @@ using CodeBase.Gameplay.Characters;
 using CodeBase.Gameplay.Characters.Config;
 using CodeBase.Gameplay.Input.Joysticks;
 using CodeBase.Gameplay.Services.Gravity;
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Character;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay.Character;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Providers.CharacterProvider;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
@@ -11,6 +11,7 @@ using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Codice.Client.BaseCommands;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 
@@ -24,7 +25,10 @@ namespace CodeBase.Infrastructure.Factories.Characters
         private readonly ICharacterProvider _characterProvider;
 
         private readonly CharacterConfig _characterConfig;
+        private readonly AssetReferenceGameObject _emptyObject;
 
+        private Transform _root;
+        
         public CharacterFactory(IObjectResolver objectResolver, 
             IAddressablesLoader addressablesLoader,
             IGravityAttraction gravityAttraction,
@@ -39,46 +43,65 @@ namespace CodeBase.Infrastructure.Factories.Characters
             _characterAddresses = staticDataProvider.AllAssetsAddresses.AllGameplayAddresses.DynamicObjectsAddresses
                 .CharacterAddresses;
             _characterConfig = staticDataProvider.GameBalanceData.CharacterConfig;
+            _emptyObject = staticDataProvider.AllAssetsAddresses.EmptyObject;
         }
         
         public override async UniTask WarmUp()
         {
             await _addressablesLoader.LoadGameObject(_characterAddresses.Head);
+            await _addressablesLoader.LoadGameObject(_emptyObject);
+        }
+
+        public async UniTask<BodyParts> CreateBodyPart()
+        {
+            GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Body);
+            GameObject gameObject = _objectResolver.Instantiate(prefab, _root);
+            
+            return gameObject.GetComponent<BodyParts>();
         }
 
         public override async UniTask Create()
         {
-            GameObject gameObject = await CreateGameObject();
+            if (_root == null)
+            {
+                GameObject rootGameObject = await CreateRootGameObject();
+                _root = rootGameObject.transform;
+            }
 
-            SetupCharacterMovement(gameObject);
+            GameObject head = await CreateHead();
 
-            CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
-            GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Body);
-            GameObject gameObject1 = _objectResolver.Instantiate(prefab);
-            GameObject gameObject2 = _objectResolver.Instantiate(prefab);
-            GameObject gameObject3 = _objectResolver.Instantiate(prefab);
-            BodyParts bodyParts1 = gameObject1.GetComponent<BodyParts>();
-            BodyParts bodyParts2 = gameObject2.GetComponent<BodyParts>();
-            BodyParts bodyParts3 = gameObject3.GetComponent<BodyParts>();
-            characterBody.AddBodyPiece(bodyParts1);
-            characterBody.AddBodyPiece(bodyParts2);
-            characterBody.AddBodyPiece(bodyParts3);
+            SetupCharacterMovement(head);
+            SetupCharacterBody(head);
             
-
-            Character character = SetupCharacter(gameObject);
+            Character character = SetupCharacter(head);
             _characterProvider.SetCharacter(character);
             
-            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = head.GetComponent<Rigidbody>();
             _gravityAttraction.AddObjectToAttraction(rigidbody);
         }
 
-        private async UniTask<GameObject> CreateGameObject()
+        private async UniTask<GameObject> CreateHead()
         {
             GameObject prefab = await _addressablesLoader.LoadGameObject(_characterAddresses.Head);
 
-            return _objectResolver.Instantiate(prefab);
+            return _objectResolver.Instantiate(prefab, _root);
+        }
+        private async UniTask<GameObject> CreateRootGameObject()
+        {
+            GameObject prefab = await _addressablesLoader.LoadGameObject(_emptyObject);
+
+            GameObject gameObject = _objectResolver.Instantiate(prefab);
+
+            gameObject.name = "Snake";
+            return gameObject;
         }
 
+        private void SetupCharacterBody(GameObject gameObject)
+        {
+            CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
+            _objectResolver.Inject(characterBody);
+        }
+        
         private Character SetupCharacter(GameObject gameObject)
         {
             Character character = gameObject.GetComponent<Character>();

@@ -1,9 +1,6 @@
-﻿using CodeBase.Gameplay.Characters;
-using CodeBase.Gameplay.Services.Gravity;
-using CodeBase.Gameplay.Services.Pool;
+﻿using CodeBase.Gameplay.Services.Gravity;
 using CodeBase.Gameplay.Services.Spawner;
 using CodeBase.Gameplay.Services.Spawners.Apples;
-using CodeBase.Infrastructure.Factories;
 using CodeBase.Infrastructure.Factories.Apples;
 using CodeBase.Infrastructure.Factories.Characters;
 using CodeBase.Infrastructure.Factories.Characters.Camera;
@@ -36,7 +33,6 @@ namespace CodeBase.Infrastructure.Installers
                 .WithParameter(_attractive)
                 .WithParameter(_attraction);
             
-            builder.Register<IApplePool, ApplePool>(Lifetime.Singleton);
             builder
                 .Register<IAppleSpawner, AppleSpawner>(Lifetime.Singleton)
                 .WithParameter(_attractive);

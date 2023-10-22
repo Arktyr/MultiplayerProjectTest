@@ -1,5 +1,10 @@
 ﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Characters.Config;
+using CodeBase.Infrastructure.Factories.Characters;
+using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 
 namespace CodeBase.Gameplay.Characters
 {
@@ -7,10 +12,25 @@ namespace CodeBase.Gameplay.Characters
     {
         [SerializeField] private BodyParts _headParts;
 
+        private ICharacterFactory _characterFactory;
+        private CharacterConfig _characterConfig;
+        
+        [Inject]
+        public void Inject(ICharacterFactory characterFactory,
+            IStaticDataProvider staticDataProvider)
+        {
+            _characterFactory = characterFactory;
+
+            _characterConfig = staticDataProvider.GameBalanceData.CharacterConfig;
+        }
+
         private readonly List<BodyParts> _bodyPieces = new();
 
-        public void AddBodyPiece(BodyParts bodyParts) => 
+        public async UniTask AddBodyPiece()
+        {
+            BodyParts bodyParts = await _characterFactory.CreateBodyPart();
             _bodyPieces.Add(bodyParts);
+        }
         
         public void ShiftPieces()
         {
@@ -22,19 +42,22 @@ namespace CodeBase.Gameplay.Characters
                 if (i == 0)
                 {
                     SlerpMove(_bodyPieces[i].BodyAttractionPart.transform,
-                        _headParts.BodyAttractionPart.transform.position, 12);
+                        _headParts.BodyAttractionPart.transform.position, _characterConfig.PartsSpeed);
 
-                    Rotate(_bodyPieces[i].BodyAttractionPart.transform, _headParts.BodyAttractionPart.rotation, 10);
+                    Rotate(_bodyPieces[i].BodyAttractionPart.transform, _headParts.BodyAttractionPart.rotation,
+                        _characterConfig.PartsRotating);
                   
-                    LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _headParts.BodyInputRotatingPart.localRotation, 10);
+                    LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _headParts.BodyInputRotatingPart.localRotation,
+                        _characterConfig.PartsRotating);
 
                     continue;
                 }
 
                 SlerpMove(_bodyPieces[i].BodyAttractionPart.transform,
-                    _bodyPieces[i-1].BodyAttractionPart.position, 6);
+                    _bodyPieces[i-1].BodyAttractionPart.position, _characterConfig.PartsSpeed);
 
-                LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _bodyPieces[i-1].BodyInputRotatingPart.rotation, 10);
+                LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _bodyPieces[i - 1].BodyInputRotatingPart.rotation,
+                    _characterConfig.PartsRotating);
             }
         }
 

@@ -7,5 +7,8 @@ namespace CodeBase.Gameplay.Characters.Config
     {
         public float Speed;
         public float RotatingSpeed;
+
+        public float PartsSpeed;
+        public float PartsRotating;
     }
 }

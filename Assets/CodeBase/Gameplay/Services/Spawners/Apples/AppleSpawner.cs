@@ -1,4 +1,5 @@
-﻿using CodeBase.Gameplay.Services.Pool;
+﻿using System.Collections.Generic;
+using CodeBase.Gameplay.Services.Pool;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -12,7 +13,9 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
         private readonly IApplePool _applePool;
 
         private readonly float _maximumApplesOnLevel;
-        private float _distanceFromMesh;
+        private readonly float _distanceFromMesh;
+
+        private Vector3 _currentNormal;
         
         public AppleSpawner(GameObject ground, 
             IApplePool applePool,
@@ -27,14 +30,15 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
             _distanceFromMesh = staticDataProvider.GameBalanceData.AppleSpawnerConfig.DistanceFromMesh;
         }
 
-        
+        private readonly List<Vector3> _positionOccupied = new();
+
         public async UniTask SpawnApples()
         {
             for (int i = 0; i < _maximumApplesOnLevel; i++) 
                 await SpawnApple();
         }
 
-        private Vector3 GetRandomPointForSpawn()
+        private async UniTask<Vector3> GetRandomPointForSpawn()
         {
             Vector2[] uvCoordinates = _mesh.uv;
             Vector3[] normals = _mesh.normals;
@@ -48,6 +52,12 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
             if (IsOnTexture(uvCoordinate))
             {
                 randomPoint += normal * _distanceFromMesh;
+
+                if (_positionOccupied.Contains(randomPoint))
+                    return await GetRandomPointForSpawn();
+
+                _currentNormal = normal;
+                
                 return randomPoint;
             }
             
@@ -57,6 +67,7 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
         private async void RespawnApple(Apple activeApple)
         {
             activeApple.PickUpped -= RespawnApple;
+            _positionOccupied.Remove(activeApple.transform.position);
             
             await SpawnApple();
         }
@@ -64,7 +75,13 @@ namespace CodeBase.Gameplay.Services.Spawners.Apples
         private async UniTask SpawnApple()
         {
             Apple apple = await _applePool.Take();
-            apple.transform.position = GetRandomPointForSpawn();
+            Transform transform = apple.transform;
+            
+            Vector3 randomPosition = await GetRandomPointForSpawn();
+
+            transform.position = randomPosition;
+            apple.transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - _currentNormal);
+            _positionOccupied.Add(randomPosition);
             
             apple.PickUpped += RespawnApple;
         }

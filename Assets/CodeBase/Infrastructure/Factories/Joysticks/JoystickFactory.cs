@@ -1,11 +1,12 @@
 using CodeBase.Common.Factories;
 using CodeBase.Gameplay.Input.Joysticks;
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay.Joystick;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 
@@ -15,7 +16,8 @@ namespace CodeBase.Infrastructure.Factories.Joysticks
     {
         private readonly IJoystickProvider _joystickProvider;
 
-        private readonly JoystickAddresses joystickAddresses;
+        private readonly JoystickAddresses _joystickAddresses;
+        private readonly AssetReferenceGameObject _canvas;
         
         public JoystickFactory(IObjectResolver objectResolver, 
             IAddressablesLoader addressablesLoader,
@@ -24,13 +26,13 @@ namespace CodeBase.Infrastructure.Factories.Joysticks
             : base(objectResolver, addressablesLoader)
         {
             _joystickProvider = joystickProvider;
-            joystickAddresses = staticDataProvider.AllAssetsAddresses.AllGameplayAddresses.JoystickAddresses;
+            _joystickAddresses = staticDataProvider.AllAssetsAddresses.AllGameplayAddresses.JoystickAddresses;
         }
 
         public override async UniTask WarmUp()
         {
-            await _addressablesLoader.LoadGameObject(joystickAddresses.Canvas);
-            await _addressablesLoader.LoadGameObject(joystickAddresses.Joystick);
+            await _addressablesLoader.LoadGameObject(_canvas);
+            await _addressablesLoader.LoadGameObject(_joystickAddresses.Joystick);
         }
         
         public override async UniTask Create()
@@ -43,14 +45,14 @@ namespace CodeBase.Infrastructure.Factories.Joysticks
         
         private async UniTask<Canvas> CreateCanvas()
         {
-            Canvas prefab = await _addressablesLoader.LoadComponent<Canvas>(joystickAddresses.Canvas);
+            Canvas prefab = await _addressablesLoader.LoadComponent<Canvas>(_canvas);
             
             return _objectResolver.Instantiate(prefab, null, false);
         }
         
         private async UniTask<Joystick> CreateJoystick(Canvas canvas)
         {
-           Joystick prefab = await _addressablesLoader.LoadComponent<Joystick>(joystickAddresses.Joystick);
+           Joystick prefab = await _addressablesLoader.LoadComponent<Joystick>(_joystickAddresses.Joystick);
 
             return _objectResolver.Instantiate(prefab, canvas.transform);
         }

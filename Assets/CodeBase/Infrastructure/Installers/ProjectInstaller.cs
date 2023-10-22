@@ -40,7 +40,7 @@ namespace CodeBase.Infrastructure.Installers
             builder.Register<IJoystickFactory, JoystickFactory>(Lifetime.Singleton);
 
             builder.Register<ICharacterProvider, CharacterProvider>(Lifetime.Singleton);
-            builder.Register<ILevelSpawnerProvider, LevelSpawnerProvider>(Lifetime.Singleton);
+            builder.Register<ILevelServicesProvider, LevelServicesProvider>(Lifetime.Singleton);
             builder.Register<IJoystickProvider, JoystickProvider>(Lifetime.Singleton);
             
             builder

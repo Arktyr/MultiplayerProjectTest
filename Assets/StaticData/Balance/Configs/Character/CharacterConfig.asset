@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a1bd32fe984e219622a694b9225497, type: 3}
-  m_Name: AppleSpawnerConfig
+  m_Script: {fileID: 11500000, guid: 35c2cfa172e944149f91ffa04caf8966, type: 3}
+  m_Name: CharacterConfig
   m_EditorClassIdentifier: 
-  DistanceFromMesh: 1
-  MaximumApplesOnLevel: 50
+  Speed: 10
+  RotatingSpeed: 2
+  PartsSpeed: 12
+  PartsRotating: 15
+  StartPosition: {x: 0, y: 20, z: -10}
+  StartNumberBodyParts: 3

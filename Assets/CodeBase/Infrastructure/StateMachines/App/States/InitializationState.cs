@@ -1,5 +1,5 @@
 ﻿using CodeBase.Common.FSM.States;
-using CodeBase.Gameplay.Services.Spawner;
+using CodeBase.Gameplay.Services.Spawners.Level;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using CodeBase.Infrastructure.Services.SceneLoader;
 using CodeBase.Infrastructure.Services.Tickable;
@@ -12,36 +12,33 @@ namespace CodeBase.Infrastructure.StateMachines.App.States
     {
         private readonly IAppStateMachine _appStateMachine;
         private readonly ISceneLoader _sceneLoader;
-        private readonly ILevelSpawnerProvider _levelSpawnerProvider;
-        private readonly ITickableService _tickableService;
+        private readonly ILevelServicesProvider _levelServicesProvider;
 
         public InitializationState(IAppStateMachine appStateMachine,
             ISceneLoader sceneLoader,
-            ILevelSpawnerProvider levelSpawnerProvider,
-            ITickableService tickableService)
+            ILevelServicesProvider levelServicesProvider)
         {
             _appStateMachine = appStateMachine;
             _sceneLoader = sceneLoader;
-            _levelSpawnerProvider = levelSpawnerProvider;
-            _tickableService = tickableService;
+            _levelServicesProvider = levelServicesProvider;
         }
 
         public async void Enter()
         {
             await _sceneLoader.Load(SceneType.Level);
-
             await SpawnLevel();
-            _tickableService.StartTicking();
 
             _appStateMachine.Enter<GameplayState>();
         }
 
         private async UniTask SpawnLevel()
         {
-            ILevelSpawner levelSpawner = await _levelSpawnerProvider.GetSpawner();
+            ILevelServices levelServices = await _levelServicesProvider.GetLevelServices();
 
-            await levelSpawner.WarmUp();
-            await levelSpawner.Spawn();
+            await levelServices.WarmUpFactories();
+            await levelServices.SpawnLevelObjects();
+            
+            levelServices.EnableServices();
         }
 
         public void Exit()

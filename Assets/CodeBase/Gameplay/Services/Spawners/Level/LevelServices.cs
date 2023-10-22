@@ -1,58 +1,66 @@
 ﻿using CodeBase.Gameplay.Services.Gravity;
 using CodeBase.Gameplay.Services.Spawners.Apples;
+using CodeBase.Infrastructure.Factories.Apples;
 using CodeBase.Infrastructure.Factories.Characters;
 using CodeBase.Infrastructure.Factories.Characters.Camera;
 using CodeBase.Infrastructure.Factories.Joysticks;
 using CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using VContainer.Unity;
 
-namespace CodeBase.Gameplay.Services.Spawner
+namespace CodeBase.Gameplay.Services.Spawners.Level
 {
-    public class LevelSpawner : ILevelSpawner, IInitializable
+    public class LevelServices : ILevelServices, IInitializable
     {
-        private readonly ILevelSpawnerProvider _levelSpawnerProvider;
+        private readonly ILevelServicesProvider _levelServicesProvider;
         
         private readonly IJoystickFactory _joystickFactory;
         private readonly ICharacterFactory _characterFactory;
         private readonly IGravityAttraction _gravityAttraction;
         private readonly ICameraFactory _cameraFactory;
         private readonly IAppleSpawner _appleSpawner;
+        private readonly IAppleFactory _appleFactory;
 
-        public LevelSpawner(IJoystickFactory joystickFactory,
-            ILevelSpawnerProvider levelSpawnerProvider,
+        public LevelServices(IJoystickFactory joystickFactory,
+            ILevelServicesProvider levelServicesProvider,
             ICharacterFactory characterFactory,
             IGravityAttraction gravityAttraction,
             ICameraFactory cameraFactory,
-            IAppleSpawner appleSpawner)
+            IAppleSpawner appleSpawner,
+            IAppleFactory appleFactory)
         {
             _joystickFactory = joystickFactory;
-            _levelSpawnerProvider = levelSpawnerProvider;
+            _levelServicesProvider = levelServicesProvider;
             _characterFactory = characterFactory;
             _gravityAttraction = gravityAttraction;
             _cameraFactory = cameraFactory;
             _appleSpawner = appleSpawner;
+            _appleFactory = appleFactory;
         }
 
-        public async UniTask WarmUp()
+        public async UniTask WarmUpFactories()
         {
             await _joystickFactory.WarmUp();
             await _characterFactory.WarmUp();
             await _cameraFactory.WarmUp();
+            await _appleFactory.WarmUp();
         }
         
-        public async UniTask Spawn()
+        public async UniTask SpawnLevelObjects()
         {
             await _joystickFactory.Create();
             await _characterFactory.Create();
             await _cameraFactory.Create();
-            _gravityAttraction.Enable();
             await _appleSpawner.SpawnApples();
-        } 
+        }
+
+        public void EnableServices()
+        {
+            _gravityAttraction.Enable();
+        }
             
 
         public void Initialize() => 
-            _levelSpawnerProvider.SetLevelSpawner(this);
+            _levelServicesProvider.SetLevelServices(this);
     }
 }

@@ -12,7 +12,6 @@ namespace CodeBase.Infrastructure.Services.Providers.StaticDataProvider
         }
 
         public AllAssetsAddresses AllAssetsAddresses { get; }
-
         public GameBalanceData GameBalanceData { get; }
     }
 }

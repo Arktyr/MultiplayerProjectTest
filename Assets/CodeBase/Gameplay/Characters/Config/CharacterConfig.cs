@@ -9,7 +9,7 @@ namespace CodeBase.Gameplay.Characters.Config
         public float RotatingSpeed;
 
         public float PartsSpeed;
-        public float PartsRotating;
+        public float PartsRotationSpeed;
 
         public Vector3 StartPosition;
         public int StartNumberBodyParts;

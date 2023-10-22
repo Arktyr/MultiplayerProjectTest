@@ -6,7 +6,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
-using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure.Services.SceneLoader
 {
@@ -21,8 +20,6 @@ namespace CodeBase.Infrastructure.Services.SceneLoader
             _scenes = staticDataProvider.AllAssetsAddresses.SceneAddresses;
             _logger = logger;
         }
-
-        public Scene CurrentScene { get; private set; }
 
         public async UniTask Load(SceneType type)
         {
@@ -43,7 +40,6 @@ namespace CodeBase.Infrastructure.Services.SceneLoader
         {
             AsyncOperationHandle<SceneInstance> handle = Addressables.LoadSceneAsync(sceneReference);
             await handle.Task;
-            CurrentScene = handle.Result.Scene;
         }
     }
 }

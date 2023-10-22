@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a1bd32fe984e219622a694b9225497, type: 3}
   m_Name: AppleSpawnerConfig
   m_EditorClassIdentifier: 
-  DistanceFromMesh: 0.01
+  DistanceFromMesh: 0.03
   MaximumApplesOnLevel: 50

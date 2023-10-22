@@ -14,3 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JoystickAddresses: {fileID: 11400000, guid: 896cfb89d2a8b2e4ab452590493d52a5, type: 2}
   DynamicObjectsAddresses: {fileID: 11400000, guid: bcce92ae6c49713488788c25e37d327a, type: 2}
+  Canvas:
+    m_AssetGUID: 843e48db8bec4f54da2728866f5696d3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

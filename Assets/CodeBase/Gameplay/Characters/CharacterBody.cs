@@ -13,15 +13,18 @@ namespace CodeBase.Gameplay.Characters
         [SerializeField] private BodyParts _headParts;
 
         private ICharacterFactory _characterFactory;
-        private CharacterConfig _characterConfig;
+
+        private float _partsSpeed;
+        private float _partsRotationSpeed;
         
         [Inject]
         public void Inject(ICharacterFactory characterFactory,
             IStaticDataProvider staticDataProvider)
         {
             _characterFactory = characterFactory;
-
-            _characterConfig = staticDataProvider.GameBalanceData.CharacterConfig;
+            
+           _partsSpeed = staticDataProvider.GameBalanceData.CharacterConfig.PartsSpeed;
+           _partsRotationSpeed = staticDataProvider.GameBalanceData.CharacterConfig.PartsRotationSpeed;
         }
 
         private readonly List<BodyParts> _bodyPieces = new();
@@ -31,7 +34,7 @@ namespace CodeBase.Gameplay.Characters
             BodyParts bodyParts = await _characterFactory.CreateBodyPart();
             _bodyPieces.Add(bodyParts);
         }
-        
+
         public void ShiftPieces()
         {
             if (_bodyPieces.Count == 0)
@@ -39,37 +42,40 @@ namespace CodeBase.Gameplay.Characters
             
             for (int i = 0; i < _bodyPieces.Count; i++)
             {
+                Rigidbody bodyAttractionPart = _bodyPieces[i].BodyAttractionPart;
+                Transform bodyRotationPart = _bodyPieces[i].BodyInputRotatingPart;
+
                 if (i == 0)
                 {
-                    SlerpMove(_bodyPieces[i].BodyAttractionPart.transform,
-                        _headParts.BodyAttractionPart.transform.position, _characterConfig.PartsSpeed);
+                    Rigidbody headAttractionPart = _headParts.BodyAttractionPart;
+                    Transform headRotationPart = _headParts.BodyInputRotatingPart;
+                    
+                    SlerpMove(bodyAttractionPart.transform, headAttractionPart.position);
 
-                    Rotate(_bodyPieces[i].BodyAttractionPart.transform, _headParts.BodyAttractionPart.rotation,
-                        _characterConfig.PartsRotating);
-                  
-                    LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _headParts.BodyInputRotatingPart.localRotation,
-                        _characterConfig.PartsRotating);
+                    Rotate(bodyAttractionPart.transform, headAttractionPart.rotation);
+                    LocalRotate(bodyRotationPart, headRotationPart.localRotation);
 
                     continue;
                 }
+                
+                Transform previousBodyAttractionPart = _bodyPieces[i-1].BodyAttractionPart.transform;
+                Transform previousBodyRotatingPart = _bodyPieces[i-1].BodyInputRotatingPart.transform;
 
-                SlerpMove(_bodyPieces[i].BodyAttractionPart.transform,
-                    _bodyPieces[i-1].BodyAttractionPart.position, _characterConfig.PartsSpeed);
+                SlerpMove(bodyAttractionPart.transform, previousBodyAttractionPart.position);
 
-                LocalRotate(_bodyPieces[i].BodyInputRotatingPart, _bodyPieces[i - 1].BodyInputRotatingPart.rotation,
-                    _characterConfig.PartsRotating);
+                LocalRotate(bodyRotationPart, previousBodyRotatingPart.rotation);
             }
         }
 
-        private void SlerpMove(Transform movePart, Vector3 direction, float speed) => 
-            movePart.position = Vector3.Slerp(movePart.position, direction, speed * Time.deltaTime);
+        private void SlerpMove(Transform movePart, Vector3 direction) => 
+            movePart.position = Vector3.Slerp(movePart.position, direction, _partsSpeed * Time.deltaTime);
 
-        private void Rotate(Transform rotatePart, Quaternion rotateTarget, float rotatingSpeed) =>
+        private void Rotate(Transform rotatePart, Quaternion rotateTarget) =>
             rotatePart.rotation = Quaternion.Slerp(rotatePart.rotation,
-                rotateTarget, rotatingSpeed * Time.deltaTime);
+                rotateTarget, _partsRotationSpeed * Time.deltaTime);
         
-        private void LocalRotate(Transform rotatePart, Quaternion rotateTarget, float rotatingSpeed) =>
+        private void LocalRotate(Transform rotatePart, Quaternion rotateTarget) =>
             rotatePart.localRotation = Quaternion.Slerp(rotatePart.localRotation,
-                rotateTarget, rotatingSpeed * Time.deltaTime);
+                rotateTarget, _partsSpeed * Time.deltaTime);
     }
 }

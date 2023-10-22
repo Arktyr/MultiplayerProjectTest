@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CodeBase.Gameplay.Services.Spawners.Apples
+namespace CodeBase.Gameplay.Services.Spawners.Apples.Config
 {
     [CreateAssetMenu(menuName = "StaticData/Balance/Configs/AppleSpawner", fileName = "AppleSpawnerConfig")]
     public class AppleSpawnerConfig : ScriptableObject

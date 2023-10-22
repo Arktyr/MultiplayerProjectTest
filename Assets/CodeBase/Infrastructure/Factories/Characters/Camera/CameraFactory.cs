@@ -49,8 +49,10 @@ namespace CodeBase.Infrastructure.Factories.Characters.Camera
         {
             CameraMovement cameraMovement = gameObject.GetComponent<CameraMovement>();
             _objectResolver.Inject(cameraMovement);
+            
             cameraMovement.Construct(_characterProvider.Character.transform, _cameraConfig.Offset,
                 _cameraConfig.IsLookedAtCharacter);
+            
             cameraMovement.Initialize();
         }
     }

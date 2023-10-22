@@ -10,5 +10,8 @@ namespace CodeBase.Gameplay.Characters.Config
 
         public float PartsSpeed;
         public float PartsRotating;
+
+        public Vector3 StartPosition;
+        public int StartNumberBodyParts;
     }
 }

@@ -2,7 +2,7 @@ using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay.Cha
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses
+namespace CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay.DynamicObjects
 {
     [CreateAssetMenu(menuName = "StaticData/Addresses/Gameplay/DynamicObjects", fileName = "DynamicObjectAddresses")]
     public class DynamicObjectsAddresses : ScriptableObject

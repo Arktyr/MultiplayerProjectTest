@@ -8,7 +8,6 @@ using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Providers.CharacterProvider;
 using CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
-using Codice.Client.BaseCommands;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -69,13 +68,16 @@ namespace CodeBase.Infrastructure.Factories.Characters
             }
 
             GameObject head = await CreateHead();
+            head.transform.position = _characterConfig.StartPosition;
 
             SetupCharacterMovement(head);
-            SetupCharacterBody(head);
-            
-            Character character = SetupCharacter(head);
-            _characterProvider.SetCharacter(character);
-            
+            await SetupCharacterBody(head);
+            SetupCharacter(head);
+            SetupCharacterToAttraction(head);
+        }
+
+        private void SetupCharacterToAttraction(GameObject head)
+        {
             Rigidbody rigidbody = head.GetComponent<Rigidbody>();
             _gravityAttraction.AddObjectToAttraction(rigidbody);
         }
@@ -96,10 +98,13 @@ namespace CodeBase.Infrastructure.Factories.Characters
             return gameObject;
         }
 
-        private void SetupCharacterBody(GameObject gameObject)
+        private async UniTask SetupCharacterBody(GameObject gameObject)
         {
             CharacterBody characterBody = gameObject.GetComponent<CharacterBody>();
             _objectResolver.Inject(characterBody);
+            
+            for (int i = 0; i < _characterConfig.StartNumberBodyParts; i++) 
+                await characterBody.AddBodyPiece();
         }
         
         private Character SetupCharacter(GameObject gameObject)
@@ -107,6 +112,7 @@ namespace CodeBase.Infrastructure.Factories.Characters
             Character character = gameObject.GetComponent<Character>();
             _objectResolver.Inject(character);
             character.Initialize();
+            _characterProvider.SetCharacter(character);
 
             return character;
         }

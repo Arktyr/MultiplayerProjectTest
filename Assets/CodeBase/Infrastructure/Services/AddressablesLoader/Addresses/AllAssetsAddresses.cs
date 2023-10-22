@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Joystick;
+using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Gameplay;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Addresses.Scenes;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

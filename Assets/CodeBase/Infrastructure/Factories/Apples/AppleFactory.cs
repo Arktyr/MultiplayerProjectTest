@@ -1,5 +1,4 @@
-﻿using CodeBase.Gameplay;
-using CodeBase.Gameplay.Apples;
+﻿using CodeBase.Gameplay.Apples;
 using CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using Cysharp.Threading.Tasks;

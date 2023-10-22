@@ -1,5 +1,4 @@
 ﻿using CodeBase.Gameplay.Characters;
-using UnityEngine;
 
 namespace CodeBase.Infrastructure.Services.Providers.CharacterProvider
 {

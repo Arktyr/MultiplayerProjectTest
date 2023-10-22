@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1bf6d0d59274945a7221adb28a01437, type: 3}
-  m_Name: GameplayAddresses
+  m_Script: {fileID: 11500000, guid: 68a1bd32fe984e219622a694b9225497, type: 3}
+  m_Name: AppleSpawnerConfig
   m_EditorClassIdentifier: 
-  JoystickAddresses: {fileID: 11400000, guid: 896cfb89d2a8b2e4ab452590493d52a5, type: 2}
-  DynamicObjectsAddresses: {fileID: 11400000, guid: bcce92ae6c49713488788c25e37d327a, type: 2}
+  DistanceFromMesh: 0
+  MaximumApplesOnLevel: 0

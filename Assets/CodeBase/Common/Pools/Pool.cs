@@ -4,10 +4,10 @@ using Cysharp.Threading.Tasks;
 
 namespace CodeBase.Common.Pools
 {
-    public abstract class Pool<TObject> : Component
+    public abstract class Pool<TObject>
     {
-        protected List<TObject> _activeObjects = new();
-        protected Queue<TObject> _disableObjects = new();
+        private readonly List<TObject> _activeObjects = new();
+        protected readonly Queue<TObject> _disableObjects = new();
         
         public async UniTask<TObject> Take()
         {

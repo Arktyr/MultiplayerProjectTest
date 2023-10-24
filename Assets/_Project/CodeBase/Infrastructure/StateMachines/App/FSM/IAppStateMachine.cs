@@ -1,4 +1,4 @@
-using _Project.CodeBase.Infrastructure.StateMachines.FSM.States;
+using _Project.CodeBase.Infrastructure.StateMachines.States;
 
 namespace _Project.CodeBase.Infrastructure.StateMachines.App.FSM
 {

@@ -1,14 +1,11 @@
 using _Project.CodeBase.Infrastructure.Factories.Joysticks;
 using _Project.CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using _Project.CodeBase.Infrastructure.Services.Logger;
-using _Project.CodeBase.Infrastructure.Services.Providers.CharacterProvider;
-using _Project.CodeBase.Infrastructure.Services.Providers.JoystickProvider;
 using _Project.CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using _Project.CodeBase.Infrastructure.Services.Providers.StaticDataProvider;
 using _Project.CodeBase.Infrastructure.Services.Providers.StaticDataProvider.Data;
 using _Project.CodeBase.Infrastructure.Services.SceneLoader;
 using _Project.CodeBase.Infrastructure.Services.Tickable;
-using _Project.CodeBase.Infrastructure.StateMachines.App;
 using _Project.CodeBase.Infrastructure.StateMachines.App.FSM;
 using _Project.CodeBase.Infrastructure.StateMachines.App.States;
 using UnityEngine;
@@ -47,10 +44,6 @@ namespace _Project.CodeBase.Infrastructure.Installers
 
         private void BindStateMachine(IContainerBuilder builder)
         {
-            builder
-                .Register<AppBootstrapper>(Lifetime.Singleton)
-                .AsImplementedInterfaces();
-            
             builder.Register<IAppStateMachine, AppStateMachine>(Lifetime.Singleton);
 
             builder.Register<InitializationState>(Lifetime.Singleton);

@@ -1,4 +1,4 @@
-﻿namespace _Project.CodeBase.Infrastructure.StateMachines.FSM.States
+﻿namespace _Project.CodeBase.Infrastructure.StateMachines.States
 {
     public interface IExitableState
     {

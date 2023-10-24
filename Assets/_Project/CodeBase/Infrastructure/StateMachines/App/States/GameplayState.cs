@@ -1,7 +1,7 @@
 ﻿using _Project.CodeBase.Gameplay.Services.Spawners.Level;
 using _Project.CodeBase.Infrastructure.Services.AddressablesLoader.Loader;
 using _Project.CodeBase.Infrastructure.Services.Tickable;
-using _Project.CodeBase.Infrastructure.StateMachines.FSM.States;
+using _Project.CodeBase.Infrastructure.StateMachines.States;
 using VContainer;
 
 namespace _Project.CodeBase.Infrastructure.StateMachines.App.States

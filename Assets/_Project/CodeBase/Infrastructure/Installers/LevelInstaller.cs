@@ -1,6 +1,7 @@
 ﻿using _Project.CodeBase.Gameplay.Services.Gravity;
 using _Project.CodeBase.Gameplay.Services.Spawners.Apples;
 using _Project.CodeBase.Gameplay.Services.Spawners.Level;
+using _Project.CodeBase.Infrastructure.Bootstrappers;
 using _Project.CodeBase.Infrastructure.Factories.Apples;
 using _Project.CodeBase.Infrastructure.Factories.Characters;
 using _Project.CodeBase.Infrastructure.Factories.Characters.Camera;
@@ -19,12 +20,19 @@ namespace _Project.CodeBase.Infrastructure.Installers
     public class LevelInstaller : LifetimeScope
     {
         [SerializeField] private GameObject _attractive;
-        [SerializeField] private Rigidbody _attraction;
         
         protected override void Configure(IContainerBuilder builder)
         {
+            BindBootstrapper(builder);
             BindServices(builder);
             BindFactories(builder);
+        }
+
+        private void BindBootstrapper(IContainerBuilder builder)
+        {
+            builder
+                .Register<LevelBootstrapper>(Lifetime.Singleton)
+                .AsImplementedInterfaces();
         }
 
         private void BindServices(IContainerBuilder builder)
@@ -35,9 +43,8 @@ namespace _Project.CodeBase.Infrastructure.Installers
 
             builder
                 .Register<IGravityAttraction, GravityAttraction>(Lifetime.Singleton)
-                .WithParameter(_attractive)
-                .WithParameter(_attraction);
-            
+                .WithParameter(_attractive);
+
             builder
                 .Register<IAppleSpawner, AppleSpawner>(Lifetime.Singleton)
                 .WithParameter(_attractive);

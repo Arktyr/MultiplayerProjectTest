@@ -2,7 +2,7 @@
 using _Project.CodeBase.Infrastructure.StateMachines.App.States;
 using VContainer.Unity;
 
-namespace _Project.CodeBase.Infrastructure.StateMachines.App
+namespace _Project.CodeBase.Infrastructure.Bootstrappers
 {
     public class AppBootstrapper : IInitializable
     {

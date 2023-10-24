@@ -2,7 +2,7 @@
 using _Project.CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using _Project.CodeBase.Infrastructure.Services.SceneLoader;
 using _Project.CodeBase.Infrastructure.StateMachines.App.FSM;
-using _Project.CodeBase.Infrastructure.StateMachines.FSM.States;
+using _Project.CodeBase.Infrastructure.StateMachines.States;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.CodeBase.Infrastructure.StateMachines.App.States
@@ -11,16 +11,18 @@ namespace _Project.CodeBase.Infrastructure.StateMachines.App.States
     {
         private readonly IAppStateMachine _appStateMachine;
         private readonly ISceneLoader _sceneLoader;
-        private readonly ILevelServicesProvider _levelServicesProvider;
-
+        
+        private ILevelServices _levelServices;
+        
         public InitializationState(IAppStateMachine appStateMachine,
-            ISceneLoader sceneLoader,
-            ILevelServicesProvider levelServicesProvider)
+            ISceneLoader sceneLoader)
         {
             _appStateMachine = appStateMachine;
             _sceneLoader = sceneLoader;
-            _levelServicesProvider = levelServicesProvider;
         }
+
+        public void SetLocalDependencies(ILevelServices levelServices) => 
+            _levelServices = levelServices;
 
         public async void Enter()
         {
@@ -32,12 +34,10 @@ namespace _Project.CodeBase.Infrastructure.StateMachines.App.States
 
         private async UniTask SpawnLevel()
         {
-            ILevelServices levelServices = await _levelServicesProvider.GetLevelServices();
-
-            await levelServices.WarmUpFactories();
-            await levelServices.SpawnLevelObjects();
+            await _levelServices.WarmUpFactories();
+            await _levelServices.SpawnLevelObjects();
             
-            levelServices.EnableServices();
+            _levelServices.EnableServices();
         }
 
         public void Exit()

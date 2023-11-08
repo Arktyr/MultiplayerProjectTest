@@ -450,8 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8993565e92cf46c991021251a339c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodyAttractionPart: {fileID: 3433918230662113015}
-  BodyInputRotatingPart: {fileID: 3542956352893351871}
+  <BodyAttractionPart>k__BackingField: {fileID: 3433918230662113015}
+  <BodyInputRotatingPart>k__BackingField: {fileID: 3542956352893351871}
 --- !u!135 &891958235430379794
 SphereCollider:
   m_ObjectHideFlags: 0

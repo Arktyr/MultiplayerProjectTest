@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8993565e92cf46c991021251a339c347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodyAttractionPart: {fileID: 312768566180284021}
-  BodyInputRotatingPart: {fileID: 6000471232625596588}
+  <BodyAttractionPart>k__BackingField: {fileID: 312768566180284021}
+  <BodyInputRotatingPart>k__BackingField: {fileID: 6000471232625596588}
 --- !u!54 &312768566180284021
 Rigidbody:
   m_ObjectHideFlags: 0

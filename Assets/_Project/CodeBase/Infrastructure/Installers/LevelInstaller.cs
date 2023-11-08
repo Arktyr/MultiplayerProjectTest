@@ -30,7 +30,7 @@ namespace _Project.CodeBase.Infrastructure.Installers
 
         private void BindBootstrapper(IContainerBuilder builder)
         {
-            Debug.Log("dsada");
+            Debug.Log("22");
             
             builder
                 .Register<LevelBootstrapper>(Lifetime.Singleton)

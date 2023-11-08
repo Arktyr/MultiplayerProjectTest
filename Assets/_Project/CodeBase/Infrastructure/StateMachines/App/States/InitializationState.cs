@@ -1,5 +1,4 @@
 ﻿using _Project.CodeBase.Gameplay.Services.Spawners.Level;
-using _Project.CodeBase.Infrastructure.Services.Providers.LevelSpawnerProvider;
 using _Project.CodeBase.Infrastructure.Services.SceneLoader;
 using _Project.CodeBase.Infrastructure.StateMachines.App.FSM;
 using _Project.CodeBase.Infrastructure.StateMachines.States;
